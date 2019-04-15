@@ -15,6 +15,9 @@ public class CommentDosINT extends GhidraScript {
                     && insn.getDefaultOperandRepresentation(0).equals("0x21")) {
 
                 for (var i = insn.getPrevious() ;; i = i.getPrevious()) {
+                    if (i == null) {
+                        break;
+                    }
                     if (i.getMnemonicString().contentEquals("MOV")) {
                         byte int_func = getRegAHContent(i);
                         if (int_func != -1 && int_func < 0x6c) {
